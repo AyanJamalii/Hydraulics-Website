@@ -12,9 +12,21 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const slides = [
-  { id: 1, type: "video", src: "/images/main.mp4" },
-  { id: 2, type: "image", src: "/images/mainPic1.jpg" },
-  { id: 3, type: "image", src: "/images/mainPic2.jpg" },
+  { 
+    id: 1, 
+    type: "image", 
+    src: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1600&auto=format&fit=crop" 
+  },
+  { 
+    id: 2, 
+    type: "image", 
+    src: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1600&auto=format&fit=crop" 
+  },
+  { 
+    id: 3, 
+    type: "image", 
+    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1600&auto=format&fit=crop" 
+  },
 ];
 
 const Home = () => {
