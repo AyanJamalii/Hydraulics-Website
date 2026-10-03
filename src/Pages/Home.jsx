@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <div className={styles.homeContainer}>
       {/* HERO SLIDER SECTION WITH TOUCH SWIPE & DESKTOP ARROWS */}
-      <section data-aos="fade-up" className={styles.homeBox}>
+      <section id="hero-section" data-aos="fade-up" className={styles.homeBox}>
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={0}
@@ -66,8 +66,8 @@ const Home = () => {
         </Swiper>
       </section>
 
-      {/* OVERVIEW SECTION */}
-      <section data-aos="fade-up" className={styles.overviewSection}>
+      {/* OVERVIEW / SERVICES SECTION */}
+      <section id="services-section" data-aos="fade-up" className={styles.overviewSection}>
         <h2 className={styles.sectionHeading}>
           Welcome to <span> M Adnan Hydraulics </span>
         </h2>
@@ -99,11 +99,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CATEGORIES SECTION */}
-      <Categories />
+      {/* PRODUCTS / CATEGORIES SECTION */}
+      <section id="products-section">
+        <Categories />
+      </section>
 
-      {/* COMBINED ABOUT & CTA SECTION */}
-      <section data-aos="fade-up" className={styles.combinedSection}>
+      {/* COMBINED ABOUT & CONTACT CTA SECTION */}
+      <section id="about-section" data-aos="fade-up" className={styles.combinedSection}>
         <div className={styles.combinedContainer}>
           <p className={styles.tagline}>" ABOUT OUR BRAND "</p>
           <h2 className={styles.brandTitle}>Built On Quality & Trust</h2>
@@ -113,17 +115,20 @@ const Home = () => {
 
           <div className={styles.divider}></div>
 
-          <h3 className={styles.ctaTitle}>Need Custom Hydraulic Equipment?</h3>
-          <p className={styles.ctaSubtext}>
-            Contact our technical team for assistance, product quotes, or custom machinery configuration.
-          </p>
-          <a href="mailto:sales@madnanhydraulics.com" className={styles.contactBtn}>
-            Contact Our Technical Team
-          </a>
+          {/* CONTACT SECTION TARGET */}
+          <div id="contact-section">
+            <h3 className={styles.ctaTitle}>Need Custom Hydraulic Equipment?</h3>
+            <p className={styles.ctaSubtext}>
+              Contact our technical team for assistance, product quotes, or custom machinery configuration.
+            </p>
+            <a href="mailto:sales@madnanhydraulics.com" className={styles.contactBtn}>
+              Contact Our Technical Team
+            </a>
+          </div>
         </div>
       </section>
     </div>
   );
 };
 
-export default Home;  
+export default Home;

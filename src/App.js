@@ -6,19 +6,20 @@ import "aos/dist/aos.css";
 import Navbar from "./Components/Navbar.jsx";
 import Footer from "./Components/Footer";
 import Home from "./Pages/Home.jsx";
+import Products from "./Pages/Products.jsx"; // <-- Dedicated Products Page
+import About from "./Pages/About.jsx";
+import Services from "./Pages/Services.jsx";
+import Contact from "./Pages/Contact.jsx";
 import ProductDetail from "./Pages/ProductDetail.jsx";
-import Men from "./Pages/Men";
-import Women from "./Pages/Women";
-import Junior from "./Pages/Junior.jsx";
 import ScrollToTop from "./Components/ScrollToTop.jsx";
-import WhatsAppBtn from "./Components/WhatsAppBtn.jsx"; // <-- WhatsApp Component import kar liya
+import WhatsAppBtn from "./Components/WhatsAppBtn.jsx";
 
 function App() {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // animation speed
-      easing: "ease-out-cubic", 
-      once: true,    // animate only once per scroll
+      duration: 1000,
+      easing: "ease-out-cubic",
+      once: true,
     });
   }, []);
 
@@ -28,13 +29,14 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} /> {/* <-- Main Products Route */}
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/men" element={<Men />} />
-        <Route path="/women" element={<Women />} />
-        <Route path="/junior" element={<Junior />} />
       </Routes>
       <Footer />
-      <WhatsAppBtn /> {/* <-- Global Floating Button */}
+      <WhatsAppBtn />
     </Router>
   );
 }

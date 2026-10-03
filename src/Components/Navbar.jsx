@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/Navbar.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -8,18 +8,27 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
-  // Dropdown States
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
   const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setIsMobileProductsOpen(false);
   };
 
-  // WhatsApp Business Inquiry Link Config
-  const whatsappNumber = "923001234567"; // Client ka WhatsApp Number
+  // Products Category Navigation Handler
+  const handleCategoryNav = (e, categoryKey) => {
+    e.preventDefault();
+    closeMobileMenu();
+    setIsProductsDropdownOpen(false);
+
+    // /products page par routing with category state
+    navigate("/products", { state: { category: categoryKey } });
+  };
+
+  const whatsappNumber = "923001234567";
   const whatsappMsg = encodeURIComponent("Hi! I would like to inquire about Madnan Hydraulics products.");
 
   return (
@@ -44,32 +53,36 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </li>
           
-          {/* Products Dropdown Item */}
+          {/* Products Dropdown */}
           <li 
             className={styles.dropdownContainer}
             onMouseEnter={() => setIsProductsDropdownOpen(true)}
             onMouseLeave={() => setIsProductsDropdownOpen(false)}
           >
-            <Link to="/products" className={styles.dropdownTrigger}>
+            <Link 
+              to="/products" 
+              className={styles.dropdownTrigger}
+              onClick={(e) => handleCategoryNav(e, 'all')}
+            >
               Products <KeyboardArrowDownIcon className={styles.arrowIcon} />
             </Link>
 
             {isProductsDropdownOpen && (
               <ul className={styles.dropdownMenu}>
                 <li>
-                  <Link to="/products?category=pumps">Hydraulic Pumps</Link>
+                  <a href="/products" onClick={(e) => handleCategoryNav(e, 'hoses')}>
+                    Hydraulic Hoses
+                  </a>
                 </li>
                 <li>
-                  <Link to="/products?category=valves">Valves & Controls</Link>
+                  <a href="/products" onClick={(e) => handleCategoryNav(e, 'fittings')}>
+                    Fittings & Adapters
+                  </a>
                 </li>
                 <li>
-                  <Link to="/products?category=cylinders">Hydraulic Cylinders</Link>
-                </li>
-                <li>
-                  <Link to="/products?category=hoses">Hoses & Fittings</Link>
-                </li>
-                <li>
-                  <Link to="/products?category=motors">Motors & Power Packs</Link>
+                  <a href="/products" onClick={(e) => handleCategoryNav(e, 'valves')}>
+                    Valves & Pumps
+                  </a>
                 </li>
               </ul>
             )}
@@ -86,7 +99,6 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Right CTA Button (Inquiry instead of Cart) */}
         <div className={styles.rightGroup}>
           <a 
             href={`https://wa.me/${whatsappNumber}?text=${whatsappMsg}`}
@@ -100,7 +112,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Sidebar */}
+      {/* Mobile Sidebar */}
       <div 
         className={`${styles.mobileMenuOverlay} ${isMobileMenuOpen ? styles.active : ''}`}
         onClick={closeMobileMenu}
@@ -119,7 +131,6 @@ const Navbar = () => {
           <nav className={styles.mobileMenuNav}>
             <Link to="/" onClick={closeMobileMenu}>Home</Link>
             
-            {/* Mobile Dropdown Group */}
             <div className={styles.mobileDropdownGroup}>
               <div 
                 className={styles.mobileDropdownHeader}
@@ -136,12 +147,10 @@ const Navbar = () => {
 
               {isMobileProductsOpen && (
                 <div className={styles.mobileSubMenu}>
-                  <Link to="/products" onClick={closeMobileMenu}>All Products</Link>
-                  <Link to="/products?category=pumps" onClick={closeMobileMenu}>Hydraulic Pumps</Link>
-                  <Link to="/products?category=valves" onClick={closeMobileMenu}>Valves & Controls</Link>
-                  <Link to="/products?category=cylinders" onClick={closeMobileMenu}>Hydraulic Cylinders</Link>
-                  <Link to="/products?category=hoses" onClick={closeMobileMenu}>Hoses & Fittings</Link>
-                  <Link to="/products?category=motors" onClick={closeMobileMenu}>Motors & Power Packs</Link>
+                  <a href="/products" onClick={(e) => handleCategoryNav(e, 'all')}>All Products</a>
+                  <a href="/products" onClick={(e) => handleCategoryNav(e, 'hoses')}>Hydraulic Hoses</a>
+                  <a href="/products" onClick={(e) => handleCategoryNav(e, 'fittings')}>Fittings & Adapters</a>
+                  <a href="/products" onClick={(e) => handleCategoryNav(e, 'valves')}>Valves & Pumps</a>
                 </div>
               )}
             </div>
