@@ -10,9 +10,8 @@ import ProductDetail from "./Pages/ProductDetail.jsx";
 import Men from "./Pages/Men";
 import Women from "./Pages/Women";
 import Junior from "./Pages/Junior.jsx";
-import { CartProvider } from "./Context/CartContext.js";
 import ScrollToTop from "./Components/ScrollToTop.jsx";
-import Checkout from "./Pages/Checkout.jsx";
+import WhatsAppBtn from "./Components/WhatsAppBtn.jsx"; // <-- WhatsApp Component import kar liya
 
 function App() {
   useEffect(() => {
@@ -24,7 +23,6 @@ function App() {
   }, []);
 
   return (
-    <CartProvider>
     <Router>
       <ScrollToTop />
       <Navbar />
@@ -34,11 +32,10 @@ function App() {
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
         <Route path="/junior" element={<Junior />} />
-        <Route path="/checkout" element={<Checkout />} />   
       </Routes>
       <Footer />
+      <WhatsAppBtn /> {/* <-- Global Floating Button */}
     </Router>
-    </CartProvider>
   );
 }
 

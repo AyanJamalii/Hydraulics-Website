@@ -1,18 +1,23 @@
 body {
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
-  background-color: #C8C8C8;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Clean scrolling ke liye */
 }
 
+/* --- HERO SLIDER --- */
 .homeBox {
-  width: 1800px;
-  height: 860px;
+  width: 100%;
+  height: 100vh;
   position: relative;
-  top: -30px;
-  left: 3%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  margin-bottom: 100px; /* Slider aur Overview ke beech 100px gap */
+  padding: 0;
   overflow: hidden;
-  border-radius: 25px;
-  background: #6b6b6b;
 }
 
 .slider {
@@ -35,22 +40,24 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 0;
 }
 
-/* ARROWS */
+/* --- SLIDER CONTROLS --- */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.4);
   color: white;
   cursor: pointer;
-  padding: 8px;
+  padding: 12px;
   z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
 }
 
 .arrow svg {
@@ -59,16 +66,16 @@ body {
 }
 
 .left {
-  left: 18px;
-}
-.right {
-  right: 18px;
+  left: 20px;
 }
 
-/* DOTS */
+.right {
+  right: 20px;
+}
+
 .dots {
   position: absolute;
-  bottom: 22px;
+  bottom: 25px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
@@ -91,79 +98,233 @@ body {
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
 }
 
-.productSection{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 100px;
-    height: auto;
-    gap: 0px;
-}
-
-.productSection h2{
-    color: #7D340A;
-    font-weight: bold;
-    font-size: 30px;
-}
-
-.decorLine{
-    width: 1800px;
-    height: 2px;
-    background: #0000004f;
-    margin-bottom: 20px;
-    border-radius: 50px;
-}
-
-.btnContainer {
-  margin-top: 50px;
+/* Container Layout */
+.homeContainer {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   display: flex;
+  flex-direction: column;
+}
+
+/* Overview Section */
+.overviewSection {
+  padding: 80px 20px;
+  margin-bottom: 100px; /* Overview aur Categories ke beech 100px gap */
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.sectionHeading {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #111;
+}
+.sectionHeading span{
+  color: #007eab;
+}
+
+.sectionDescription {
+  color: #555;
+  max-width: 850px;
+  margin: 0 auto 40px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.cardGrid {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  width: 350px;
+  text-align: left;
+}
+
+.card h3 {
+  color: #006f97;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Categories Section */
+.categoriesSection {
+  padding: 80px 20px;
+  margin-bottom: 100px; /* Categories aur Combined Section ke beech 100px gap */
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.categoriesHeading {
+  font-size: 2.2rem;
+  color: #111;
+  margin-bottom: 10px;
+}
+.categoriesHeading span{
+  color: #007eab;
+}
+
+.categoriesSubheading {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 40px;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.categoryCard {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 15px;
+  border: 1px solid #eee;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.viewProductBtn {
-  width: 200px;
-  height: 60px;
-  border-radius: 20px;
-  border: none;
-  background: #BC5301;
-  color: #FFF4C4;
-  font-size: 15px;
+.categoryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 250px;
+  background-color: #e2e8f0;
+  border-radius: 8px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 8px; 
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.categoryName {
+  font-size: 1.1rem;
+  color: #222;
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+/* Combined About & CTA Section */
+.combinedSection {
+  background-color: #111;
+  color: #fff;
+  padding: 80px 20px;
+  margin-bottom: 100px; /* Combined Section aur Footer ke beech 100px gap */
+  text-align: center;
+}
+
+.combinedContainer {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.tagline {
+  color: #ffffff94;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.brandTitle {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.brandText {
+  color: #ccc;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.divider {
+  width: 80px;
+  height: 3px;
+  background-color: #003a4f;
+  margin: 0 auto 40px auto;
+  border-radius: 2px;
+}
+
+.ctaTitle {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.ctaSubtext {
+  color: #aaa;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.contactBtn {
+  display: inline-block;
+  background-color: #003a4f;
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: 5px;
   text-decoration: none;
-  transition: all 0.3s ease; 
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.icon {
-  font-size: 30px; 
+.contactBtn:hover {
+  background-color: #007aa7;
 }
 
-.viewProductBtn:hover{
-   transform: translateY(-4px);
-  box-shadow: 0px 10px 32px 0px rgba(125, 52, 10, 0.35);
-  transition: all 0.3s ease; 
-}
-
-/* RESPONSIVE DESIGN FOR MOBILE */
+/* --- RESPONSIVE STYLES --- */
+/* Mobile Screen (768px and below) */
 @media screen and (max-width: 768px) {
-  .homeBox {
-    width: 95%;
-    height: 300px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 10px;
-    border-radius: 15px;
+  .homeBox, 
+  .slide, 
+  .media {
+    width: 100%;
+    height: 100vh; /* 60vh ko hata kar 100vh kar diya */
+    min-height: 100vh;
   }
 
-  /* Arrows for mobile */
+  .media {
+    object-fit: cover; /* Aspect ratio tight rakhega aur image/video poori Screen fill karegi */
+  }
+
+  .homeBox {
+    margin-bottom: 60px;
+  }
+
   .arrow {
-    padding: 6px;
-    /* background: rgba(0, 0, 0, 0.3); */
-    border-radius: 50%;
+    padding: 8px;
   }
 
   .arrow svg {
@@ -178,9 +339,8 @@ body {
     right: 10px;
   }
 
-  /* Dots for mobile */
   .dots {
-    bottom: 15px;
+    bottom: 20px;
     gap: 8px;
   }
 
@@ -189,45 +349,29 @@ body {
     height: 10px;
   }
 
-  /* Product Section Mobile */
-  .productSection {
-    margin-top: 50px;
-    padding: 0 20px;
-  }
-
-  .productSection h2 {
-    font-size: 24px;
-  }
-
-  .decorLine {
-    width: 90%;
-    height: 3px;
-  }
-
-  .viewProductBtn {
-    width: 180px;
-    height: 50px;
-    font-size: 14px;
-  }
-
-  .icon {
-    font-size: 24px;
+  .overviewSection,
+  .categoriesSection,
+  .combinedSection {
+    padding: 50px 20px;
   }
 }
 
+/* Extra Small Screen (480px and below) */
 @media screen and (max-width: 480px) {
-  .homeBox {
-            width: 100%;
-        height: 500px;
-        border-radius: 12px;
-        position: relative;
-        left: 0px;
-        top: -50px;
+  .homeBox, 
+  .slide, 
+  .media {
+    width: 100%;
+    height: 100vh; /* 50vh ki jagah 100vh */
+    min-height: 100vh;
   }
 
-  /* Smaller arrows for very small screens */
+  .homeBox {
+    margin-bottom: 40px;
+  }
+
   .arrow {
-    padding: 4px;
+    padding: 6px;
   }
 
   .arrow svg {
@@ -242,9 +386,8 @@ body {
     right: 8px;
   }
 
-  /* Smaller dots */
   .dots {
-    bottom: 12px;
+    bottom: 15px;
     gap: 6px;
   }
 
@@ -253,43 +396,53 @@ body {
     height: 8px;
   }
 
-  /* Product Section for very small screens */
-  .productSection {
-    margin-top: 40px;
-    padding: 0 15px;
-  }
-
-  .productSection h2 {
-    font-size: 20px;
-  }
-
-  .decorLine {
-    width: 90%;
-    height: 2px;
-  }
-
-  .viewProductBtn {
-    width: 160px;
-    height: 45px;
-    font-size: 13px;
-  }
-
-  .icon {
-    font-size: 20px;
+  .overviewSection,
+  .categoriesSection,
+  .combinedSection {
+    padding: 40px 15px;
   }
 }
+.mySwiper :global(.swiper-button-next),
+.mySwiper :global(.swiper-button-prev) {
+  color: #ffffff;
+  width: 25px; 
+  height: 25px;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
 
-/* Tablet styles */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-  .homeBox {
-    width: 90%;
-    height: 500px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: -20px;
+.mySwiper :global(.swiper-button-next):hover,
+.mySwiper :global(.swiper-button-prev):hover {
+  color: rgb(0, 80, 155);
+}
+
+/* Arrow Icon ka Size Chhota karne ke liye */
+.mySwiper :global(.swiper-button-next)::after,
+.mySwiper :global(.swiper-button-prev)::after {
+  font-size: 16px !important; /* Default font-size 44px hota hai, isko chhota kar diya */
+  font-weight: bold;
+}
+
+/* Pagination Dots Styling */
+.mySwiper :global(.swiper-pagination-bullet) {
+  background: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+.mySwiper :global(.swiper-pagination-bullet-active) {
+  background: #ffffff;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media screen and (max-width: 768px) {
+  /* Mobile me arrows ko complete hide kar diya */
+  .mySwiper :global(.swiper-button-next),
+  .mySwiper :global(.swiper-button-prev) {
+    display: none !important;
   }
 
-  .decorLine {
-    width: 90%;
+  .homeBox {
+    height: 100vh;
+    margin-bottom: 60px;
   }
 }

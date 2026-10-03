@@ -3,18 +3,23 @@
 }
 
 .navbar {
-    width: 1200px;
+    width: 90%;
+    max-width: 1200px;
     height: 60px;
     background: linear-gradient(to right, rgba(156, 156, 156, 0.6) 16%, rgba(156, 156, 156, 0.6) 84%, rgba(156, 156, 156, 0.6) 100%);
-    position: sticky;
-    left: 15%;
-    top: 50px;
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto; /* Pure element ko screen ke center mein align karega bina transform ke */
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    z-index: 1;
+    z-index: 1000;
+    transition: all 0.3s ease;
 }
 
 /* Hamburger Menu Button */
@@ -31,7 +36,7 @@
 .hamburgerIcon {
     width: 28px;
     height: 28px;
-    color: #392b26;
+    color: #1b2225;
 }
 
 .leftGroup {
@@ -41,10 +46,9 @@
 
 .logo a {
     text-decoration: none;
-    color: black;
     font-size: 35px;
     font-weight: bold;
-    color: #392b26;
+    color: #1b2225;
 }
 
 .menu {
@@ -53,42 +57,93 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 .menu li a {
     text-decoration: none;
-    color: #392b26;
+    color: #1b2225;
     font-weight: 500;
     font-size: 15px;
+    transition: color 0.2s ease;
 }
 
-.cartBtn {
+.menu li a:hover {
+    color: #007eab;
+}
+
+/* Desktop Products Dropdown Styles */
+.dropdownContainer {
     position: relative;
+}
+
+.dropdownTrigger {
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: #392b26;
+    gap: 3px;
     cursor: pointer;
-    background: transparent;
-    border: none;
 }
 
-.cartIcon {
-    width: 28px;
-    height: 28px;
-    color: black;
+.arrowIcon {
+    font-size: 18px !important;
 }
 
-.cartCount {
-    font-size: 11px;
-    position: relative;
-    top: -6px;
-    right: 8px;
-    color: #c7c7c7;
-    background: red;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 220px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 8px 0;
+    list-style: none;
+    margin-top: 0px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dropdownMenu li a {
+    display: block;
+    padding: 10px 18px;
+    color: #1b2225;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdownMenu li a:hover {
+    background-color: #f3f4f6;
+    color: #0284c7;
+}
+
+/* Right Side WhatsApp Inquiry CTA Button */
+.rightGroup {
+    display: flex;
+    align-items: center;
+}
+
+.whatsappNavBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #25d366;
+    color: #ffffff !important;
+    padding: 7px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+}
+
+.whatsappNavBtn:hover {
+    background-color: #20ba5a;
+    transform: translateY(-1px);
+}
+
+.waIcon {
+    font-size: 18px !important;
 }
 
 /* Mobile Menu Styles */
@@ -137,9 +192,9 @@
 
 .mobileMenuHeader h3 {
     margin: 0;
-    color: #392b26;
-    font-size: 20px;
-    font-weight: 600;
+    color: #1b2225;
+    font-size: 22px;
+    font-weight: 700;
 }
 
 .closeBtn {
@@ -147,7 +202,7 @@
     border: none;
     cursor: pointer;
     padding: 5px;
-    color: #392b26;
+    color: #1b2225;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,50 +214,67 @@
 }
 
 .mobileMenuNav {
-    padding: 20px 0;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
 }
 
 .mobileMenuNav a {
-    padding: 15px 20px;
+    padding: 14px 20px;
     text-decoration: none;
-    color: #392b26;
+    color: #1b2225;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     border-bottom: 1px solid #f0f0f0;
     transition: background-color 0.3s ease;
 }
 
 .mobileMenuNav a:hover {
     background-color: #f8f8f8;
-    color: #000;
+    color: #007eab;
 }
 
-.mobileMenuNav a:last-child {
-    border-bottom: none;
+/* Mobile Accordion Dropdown Styles */
+.mobileDropdownGroup {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.mobileDropdownHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    color: #1b2225;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.mobileSubMenu {
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobileSubMenu a {
+    padding: 12px 20px 12px 35px;
+    font-size: 14px;
+    color: #555555;
 }
 
 /* Media Queries for Responsive Design */
 @media screen and (max-width: 768px) {
     .navbar {
-        width: 95%;
-        max-width: 95%;
-        left: 50%;
-        transform: translateX(-50%);
+        width: 92%;
+        top: 15px;
         padding: 0 1rem;
-        justify-content: space-between;
-        top: 20px;
-        z-index: 1000;
     }
 
-    /* Show hamburger button on mobile */
     .hamburgerBtn {
         display: flex;
         order: 1;
     }
 
-    /* Center the logo */
     .leftGroup {
         order: 2;
         position: absolute;
@@ -214,25 +286,30 @@
         font-size: 28px;
     }
 
-    /* Hide desktop menu */
     .menu {
         display: none;
     }
 
-    /* Keep cart button on right */
-    .cartBtn {
+    .rightGroup {
         order: 3;
+    }
+
+    .waText {
+        display: none;
+    }
+
+    .whatsappNavBtn {
+        padding: 8px;
+        border-radius: 50%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .navbar {
-               height: 55px;
+        height: 55px;
         padding: 0 0.8rem;
-        top: 15px;
+        top: 12px;
         width: 90%;
-        left: 10px;
-    
     }
 
     .logo a {
@@ -240,11 +317,6 @@
     }
 
     .hamburgerIcon {
-        width: 24px;
-        height: 24px;
-    }
-
-    .cartIcon {
         width: 24px;
         height: 24px;
     }

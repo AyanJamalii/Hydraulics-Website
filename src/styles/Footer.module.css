@@ -1,18 +1,177 @@
 .footer {
-  width: 100%;
-  padding: 15px 0;
-  background: rgb(177 75 0 / 58%);
-  border-top: 1px solid rgba(255, 244, 196, 0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding-top: 50px;
+  font-family: inherit;
 }
 
-.text {
-    color: #392b26;
-    font-size: 13px;
-    font-weight: 500;
-  letter-spacing: 0.5px;
-  text-align: center;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+}
+
+/* Brand Section */
+.brandLogo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.address, .contact {
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+/* Section Titles & Links */
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.helpText {
+  color: #aaa;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.profileBtn {
+  background-color: #003a4f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.profileBtn:hover {
+  background-color: #007aa7;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
   margin: 0;
+}
+
+.linkList li {
+  margin-bottom: 10px;
+}
+
+.linkList a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.linkList a:hover {
+  color: #ffffff;
+}
+
+.groupText {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+/* Social Icons Bar */
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0 20px 0;
+}
+
+.socialIcons a {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.socialIcons a:hover {
+  background-color: #003a4f;
+  transform: translateY(-3px);
+}
+
+/* Copyright Bar & Developer Hover Card */
+.copyrightBar {
+  background-color: #003a4f;
+  text-align: center;
+  padding: 15px 20px;
+  font-size: 0.88rem;
+  color: #ffffff;
+}
+
+.developerHover {
+  position: relative;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline-block;
+}
+
+/* Hover Tooltip Card */
+.tooltipBox {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 135%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background-color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease-in-out;
+  white-space: nowrap;
+  z-index: 100;
+}
+
+/* Small Arrow pointing down */
+.tooltipBox::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.developerHover:hover .tooltipBox {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.hireBtn {
+  color: #003a4f;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.hireBtn:hover {
+  text-decoration: underline;
 }

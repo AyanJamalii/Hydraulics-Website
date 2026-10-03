@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import styles from "../styles/Home.module.css";
+import Categories from "../Components/Categories";
 
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import Card from "../Components/Card";
-import { menProducts } from "../Data/Products";
-import Button from "../Components/Button";
-import SpecialCollection from "../Sections/SpecialCollection";
-import About from "../Sections/About";
-import Testimonials from "../Sections/Testimonials";
-import Shops from "../Sections/Shops";
+// Swiper modules and components import
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+// Swiper CSS styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const slides = [
   { id: 1, type: "video", src: "/images/main.mp4" },
@@ -18,137 +18,100 @@ const slides = [
 ];
 
 const Home = () => {
-  const [current, setCurrent] = useState(0);
-  const intervalRef = useRef(null);
-
-  useEffect(() => {
-    startAutoplay();
-    return () => clearInterval(intervalRef.current);
-  }, []);
-
-  const startAutoplay = () => {
-    clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-  };
-
-  const resetAutoplay = () => {
-    startAutoplay();
-  };
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
-    resetAutoplay();
-  };
-
-  const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-    resetAutoplay();
-  };
-
-  const goTo = (index) => {
-    setCurrent(index);
-    resetAutoplay();
-  };
-
   return (
-    <>
-    <div 
-    data-aos="fade-up"
-      className={styles.homeBox}
-      onMouseEnter={() => clearInterval(intervalRef.current)}
-      onMouseLeave={() => startAutoplay()}
-    >
-      <div
-        className={styles.slider}
-        style={{ transform: `translateX(-${current * 100}%)` }}
-      >
-        {slides.map((s) => (
-          <div key={s.id} className={styles.slide}>
-            {s.type === "video" ? (
-              <video
-                src={s.src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className={styles.media}
-              />
-            ) : (
-              <img src={s.src} alt={`Slide ${s.id}`} className={styles.media} />
-            )}
+    <div className={styles.homeContainer}>
+      {/* HERO SLIDER SECTION WITH TOUCH SWIPE & DESKTOP ARROWS */}
+      <section data-aos="fade-up" className={styles.homeBox}>
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={0}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          pagination={{ clickable: true }}
+          navigation={true}
+          className={styles.mySwiper}
+        >
+          {slides.map((s) => (
+            <SwiperSlide key={s.id} className={styles.slide}>
+              {s.type === "video" ? (
+                <video
+                  src={s.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className={styles.media}
+                />
+              ) : (
+                <img src={s.src} alt={`Slide ${s.id}`} className={styles.media} />
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+
+      {/* OVERVIEW SECTION */}
+      <section data-aos="fade-up" className={styles.overviewSection}>
+        <h2 className={styles.sectionHeading}>
+          Welcome to <span> M Adnan Hydraulics </span>
+        </h2>
+        <p className={styles.sectionDescription}>
+          We are a trusted provider of high-performance hydraulic solutions, industrial fittings, and machinery equipment. Our goal is to supply engineering components built for high durability, precision, and zero pressure leakage in challenging industrial environments.
+        </p>
+
+        <div className={styles.cardGrid}>
+          <div className={styles.card}>
+            <h3>Engineering Reliability</h3>
+            <p>
+              Delivering high-pressure hose assemblies and hydraulic units tested to withstand demanding industrial pressures.
+            </p>
           </div>
-        ))}
-      </div>
 
-      <button
-        className={`${styles.arrow} ${styles.left}`}
-        onClick={prevSlide}
-        aria-label="Previous slide"
-      >
-        <ArrowBackIosIcon />
-      </button>
+          <div className={styles.card}>
+            <h3>Tailored Solutions</h3>
+            <p>
+              Custom fittings, power units, and control valve setups designed according to your exact machinery requirements.
+            </p>
+          </div>
 
-      <button
-        className={`${styles.arrow} ${styles.right}`}
-        onClick={nextSlide}
-        aria-label="Next slide"
-      >
-        <ArrowForwardIosIcon />
-      </button>
+          <div className={styles.card}>
+            <h3>Quality Standards</h3>
+            <p>
+              Sourcing high-grade raw materials and ISO-certified fluid components to ensure seamless continuous operation.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <div className={styles.dots}>
-        {slides.map((_, idx) => (
-          <button
-            key={idx}
-            className={`${styles.dot} ${idx === current ? styles.activeDot : ""}`}
-            onClick={() => goTo(idx)}
-            aria-label={`Go to slide ${idx + 1}`}
-          />
-        ))}
-      </div>
+      {/* CATEGORIES SECTION */}
+      <Categories />
+
+      {/* COMBINED ABOUT & CTA SECTION */}
+      <section data-aos="fade-up" className={styles.combinedSection}>
+        <div className={styles.combinedContainer}>
+          <p className={styles.tagline}>" ABOUT OUR BRAND "</p>
+          <h2 className={styles.brandTitle}>Built On Quality & Trust</h2>
+          <p className={styles.brandText}>
+            At <strong>M Adnan Hydraulics</strong>, we are committed to delivering high-performance hydraulic solutions and heavy-duty machinery parts. What started as a vision to provide dependable industrial engineering components has grown into a trusted partner for hundreds of clients. We focus on durability, precision engineering, and fair pricing to ensure your operations run without downtime.
+          </p>
+
+          <div className={styles.divider}></div>
+
+          <h3 className={styles.ctaTitle}>Need Custom Hydraulic Equipment?</h3>
+          <p className={styles.ctaSubtext}>
+            Contact our technical team for assistance, product quotes, or custom machinery configuration.
+          </p>
+          <a href="mailto:sales@madnanhydraulics.com" className={styles.contactBtn}>
+            Contact Our Technical Team
+          </a>
+        </div>
+      </section>
     </div>
-
-
-            {/* PRODUCT SECTION  */}
-
-
-      <div data-aos="fade-up" className={styles.productSection}>
-        <h2>Our Products</h2>
-        <div className={styles.decorLine}></div>
-        <Card products={menProducts} limit={8}/>
-        <Button />
-      </div>
-
-
-          {/* SPECIAL COLLECTION  */}
-
-        <div className={styles.specialCollectionSec}>
-          <SpecialCollection />
-        </div>
-
-          {/* ABOUT  */}
-
-        <div className={styles.AboutSeciton}>
-          <About />
-        </div>
-
-
-            {/* TESTIMONIALS SECTION  */}
-
-           <div>
-            <Testimonials />
-            </div> 
-
-                {/* SHOPS  */}
-
-          <div>
-            <Shops />
-          </div>
-          
-    </>
   );
 };
 
-export default Home;
+export default Home;  
