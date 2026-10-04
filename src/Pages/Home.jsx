@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async"; // ya 'react-helmet'
 import styles from "../styles/Home.module.css";
 import Categories from "../Components/Categories";
 
@@ -15,23 +16,80 @@ const slides = [
   { 
     id: 1, 
     type: "image", 
-    src: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1600&auto=format&fit=crop" 
+    src: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1600&auto=format&fit=crop",
+    alt: "Industrial Hydraulic Pumps and Machinery Setup"
   },
   { 
     id: 2, 
     type: "image", 
-    src: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1600&auto=format&fit=crop" 
+    src: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1600&auto=format&fit=crop",
+    alt: "Precision Industrial Engineering and Welding Equipment"
   },
   { 
     id: 3, 
     type: "image", 
-    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1600&auto=format&fit=crop" 
+    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1600&auto=format&fit=crop",
+    alt: "High-Pressure Hydraulic Systems and Valves Manufacturing"
   },
 ];
 
 const Home = () => {
+  // Schema.org Structured Data for Local Business & Hydraulics Supplier
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "IndustrialBusiness",
+    "name": "M Adnan Hydraulics",
+    "description": "Provider of high-performance hydraulic solutions, industrial fittings, pumps, motors, and machinery equipment.",
+    "url": "https://madnanhydraulics.com",
+    "logo": "https://madnanhydraulics.com/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "sales@madnanhydraulics.com",
+      "contactType": "technical support"
+    }
+  };
+
   return (
     <div className={styles.homeContainer}>
+      {/* SEO META TAGS & HEAD DATA */}
+      <Helmet>
+        <title>M Adnan Hydraulics | High-Performance Hydraulic Solutions & Fittings</title>
+        <meta 
+          name="description" 
+          content="M Adnan Hydraulics is a trusted supplier of high-pressure hydraulic pumps, motors, valves, cylinders, hose assemblies, and industrial engineering components." 
+        />
+        <meta 
+          name="keywords" 
+          content="hydraulic solutions, industrial fittings, hydraulic pumps, hydraulic motors, control valves, high pressure hoses, M Adnan Hydraulics, engineering equipment" 
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://madnanhydraulics.com" />
+
+        {/* Open Graph / Facebook / WhatsApp Meta Tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="M Adnan Hydraulics | High-Performance Hydraulic Solutions" />
+        <meta 
+          property="og:description" 
+          content="Trusted provider of high-pressure hydraulic components, custom fittings, and precision engineering solutions." 
+        />
+        <meta property="og:image" content={slides[0].src} />
+        <meta property="og:url" content="https://madnanhydraulics.com" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="M Adnan Hydraulics | High-Performance Hydraulic Solutions" />
+        <meta 
+          name="twitter:description" 
+          content="Trusted provider of high-pressure hydraulic components, custom fittings, and precision engineering solutions." 
+        />
+        <meta name="twitter:image" content={slides[0].src} />
+
+        {/* Structured Data / Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify(schemaData)}
+        </script>
+      </Helmet>
+
       {/* HERO SLIDER SECTION WITH TOUCH SWIPE & DESKTOP ARROWS */}
       <section id="hero-section" data-aos="fade-up" className={styles.homeBox}>
         <Swiper
@@ -59,7 +117,12 @@ const Home = () => {
                   className={styles.media}
                 />
               ) : (
-                <img src={s.src} alt={`Slide ${s.id}`} className={styles.media} />
+                <img 
+                  src={s.src} 
+                  alt={s.alt} 
+                  className={styles.media} 
+                  loading={s.id === 1 ? "eager" : "lazy"} 
+                />
               )}
             </SwiperSlide>
           ))}
@@ -121,7 +184,11 @@ const Home = () => {
             <p className={styles.ctaSubtext}>
               Contact our technical team for assistance, product quotes, or custom machinery configuration.
             </p>
-            <a href="mailto:sales@madnanhydraulics.com" className={styles.contactBtn}>
+            <a 
+              href="mailto:sales@madnanhydraulics.com" 
+              className={styles.contactBtn}
+              title="Contact M Adnan Hydraulics Technical Support"
+            >
               Contact Our Technical Team
             </a>
           </div>
